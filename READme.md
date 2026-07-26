@@ -5,7 +5,7 @@
 
 ### Considerations
 - This will be used to track specific devices registered within the system, for privacy concerns and avoiding headaches caused by influx of devices pinging the reciever
-- It has become a common standard to have devices rotate their BLE MAC addresses rotate so unless the device is paired with the reciever, it will fail to recognize the same device later down the line
+- It has become a common standard to have device s rotate their BLE MAC addresses rotate so unless the device is paired with the reciever, it will fail to recognize the same device later down the line
 
 ### Setup
 - Due to current limitations on affordability and money, the testing would be limited to one, and avoiding room recognition, rather just area recognition in that the prescence of a device indicating the prescence of that individual in the area
@@ -33,3 +33,7 @@
 - Resolvable Random Private Address
 - Utilize an IRK whereby it is stored in the resolving list
 - I have two ESP32, grab more as well and then try the triangulation process
+
+### Relevant Questions & Answers
+Why not just use ESPresense?
+> I did evaluate it, in that it handles the sensing layer well, but I needed the resolved presence signal to feed conditional automation logic (camera power-cycling, agent-triggered notifications) that's specific to my setup.
