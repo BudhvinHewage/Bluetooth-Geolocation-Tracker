@@ -1,3 +1,15 @@
+/**
+ * NimBLE_Secure_Server Demo:
+ *
+ * This example demonstrates the secure passkey protected conenction and communication between an esp32 server and an
+ * esp32 client. Please note that esp32 stores auth info in nvs memory. After a successful connection it is possible
+ * that a passkey change will be ineffective. To avoid this clear the memory of the esp32's between security testings.
+ * esptool.py is capable of this, example: esptool.py --port /dev/ttyUSB0 erase_flash.
+ *
+ *  Created: on Jan 08 2021
+ *      Author: mblasee
+ */
+
 #include <Arduino.h>
 #include <NimBLEDevice.h>
 
@@ -5,6 +17,7 @@ void setup() {
     Serial.begin(115200);
     Serial.println("Starting NimBLE Server");
     NimBLEDevice::init("NimBLE");
+    NimBLEDevice::setPower(3); /** +3db */
 
     NimBLEDevice::setSecurityAuth(true, true, false); /** bonding, MITM, don't need BLE secure connections as we are using passkey pairing */
     NimBLEDevice::setSecurityPasskey(123456);
@@ -21,7 +34,6 @@ void setup() {
 
     NimBLEAdvertising* pAdvertising = NimBLEDevice::getAdvertising();
     pAdvertising->addServiceUUID("ABCD");
-    pAdvertising->setName("NimBLE");
     pAdvertising->start();
 }
 
