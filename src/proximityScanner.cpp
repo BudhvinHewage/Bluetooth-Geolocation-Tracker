@@ -2,20 +2,18 @@
 #include <NimBLEDevice.h>
 
 int scanTime = 5000;
-NimBLEScan* pBLEScan = nullptr; 
 
 class scanCallbacks : public NimBLEScanCallbacks {
     // Initial discovery, advertisement data only.
     void onDiscovered(const NimBLEAdvertisedDevice* advertisedDevice) override {
         if (NimBLEDevice::isBonded(advertisedDevice->getAddress())) {
-            printf("Found previously connected device.\n");
+            printf("Found previously connected device")
         }
     }
 } scanCallbacks;
 
 void setup() {
-    printf("The number of currently bonded devices are: %d. \n",NimBLEDevice::getNumBonds());
-    pBLEScan = NimBLEDevice::getScan();
+    NimBLEScan* pBLEScan = NimBLEDevice::getScan();
     pBLEScan->setScanCallbacks(&scanCallbacks, false);
     pBLEScan->setActiveScan(false);                     // Set active scanning, this will get more data from the advertiser.
     pBLEScan->setMaxResults(0);                         // Do not store the scan results, use callback only.
